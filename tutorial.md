@@ -34,8 +34,7 @@ Vytváří/mapuje modelové entity na DB struktury. Zde se definují pomocí Flu
 Napojení entit lze implementovat:
 * přidáním vlastnosti typu DBSet<> na náš DBContext
 * zavoláním metody "modelBuilder.Entity<>()" v "OnModelCreating"
-
-
+* přidáním entity do již "napojené" entity jako vlastnosti
 
 ## Aktivace migrace
 ### Package console

@@ -12,6 +12,8 @@
 
         public virtual Language Language { get; set; }
 
+        public byte GenderId { get; set; }
+        
         public virtual Gender Gender { get; set; }
     }
 }
