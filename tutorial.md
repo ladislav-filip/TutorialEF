@@ -19,6 +19,7 @@ Jde o třídy entit reprezentující databázové struktury - objektový model d
 * název třídy se mapuje na název tabulky
 * název vlastnosti se mapuje na název pole tabulky
 * pole mající název "Id" nebo sufix "Id" se nastavují jako primární klíče
+* jednoduché cizí klíče se nastaví automaticky pokud odpovídají konvenci názvu `EntitaId`
 
 ## DBContext
 Jedná se vždy o třídu dědící z bázové třídy "DBContext" a implementující konfiguraci databáze a napojení modelových entit na struktury v DB.
@@ -56,4 +57,17 @@ Aplikuje připravené změny do DB<br/>
 
 ### Postřehy
 U migrací je vhodné vždy zkontrolovat vygenerovaný aktualizační soubor. Dále je lepší provádět migrace po menších částech, pro lepší řešení případných migračních problémů
+
+#### Primární klíče
+Jednoduché (single) klíče lze definovat pomocí data atributů. U složených (composite) klíčů je nutné použít vždy FluentAPI.
+
+## Logování
+Proti předchozímu EF6 je zde logování řešenou pomocí "providerů" - akce Database.Log zde již není dostupná.
+
+Nutno přidat Nuget "Microsoft.Extensions.Logging.LoggerFactory" pro vytváření potřebných providerů a nastavit mu požadovaného providera. Může být jak vlastní implementace, tak nějaký existující, např. "Microsoft.Extensions.Logging.Debug.DebugLoggerProvider"<br/>
+`static readonly Microsoft.Extensions.Logging.LoggerFactory LogFactory`<br/>
+`  = new Microsoft.Extensions.Logging.LoggerFactory(new[] { new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider() });`
+
+a v metodě "OnConfiguring" přihlásit k odběru:<br/>
+`optionsBuilder.UseLoggerFactory(LogFactory);`
 

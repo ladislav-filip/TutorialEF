@@ -5,13 +5,20 @@ namespace TutorTerm.DAL
 {
     public class TutorContext : DbContext
     {
+        /// <summary>
+        /// Továrna pro logovací providery
+        /// </summary>
+        static readonly Microsoft.Extensions.Logging.LoggerFactory LogFactory
+            = new Microsoft.Extensions.Logging.LoggerFactory(new[] { new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider() });
+        
         public DbSet<Gender> Genders { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlite(@"Data source=s:\tutor.db");                
+                optionsBuilder.UseSqlite(@"Data source=s:\tutor.db");    
+                optionsBuilder.UseLoggerFactory(LogFactory);
             }            
         }
 
