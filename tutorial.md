@@ -37,6 +37,7 @@ Napojení entit lze implementovat:
 * přidáním entity do již "napojené" entity jako vlastnosti
 
 ## Aktivace migrace
+Aktivace migrací se v DB projeví vytvořením speciální tabulky s názvem "__EFMigrationsHistory", kde jsou ukládany informace o aplikovaných migracích.
 ### Package console
 Provede zapnutí/inicializaci migrací<br/>
 `Add-Migration InitialCreate`<br/>
@@ -52,4 +53,7 @@ Aplikuje připravené změny do DB<br/>
 `dotnet ef database update`<br/>
 `dotnet ef migrations add NovaZmenaStruktur`<br/>
 `dotnet ef database update`
+
+### Postřehy
+U migrací je vhodné vždy zkontrolovat vygenerovaný aktualizační soubor. Dále je lepší provádět migrace po menších částech, pro lepší řešení případných migračních problémů
 

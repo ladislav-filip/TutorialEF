@@ -33,6 +33,26 @@ namespace TutorTerm.DAL
                 // pokud není nullable, tak použití "IsRequired" nevygeneruje korektní migraci
                 ent.Property(p => p.Alpha).HasDefaultValue(true);
             });
+
+            modelBuilder.Entity<Order>(ent =>
+            {
+                // nastavení názvu tabulky v databázi
+                ent.ToTable("MyOrders");
+                // pořadí klíče má význam pro sestavení indexu
+                ent.HasKey(k => new {k.Prefix, k.Year, k.Number});
+                
+                                
+            });
+
+            modelBuilder.Entity<OrderItem>(ent =>
+            {
+                // primární klíč nemá nýzev dle konvencí, takže je nutné jej zde definovat
+                ent.HasKey(k => k.ItemNumber);
+                // vytvoříme vazbu přes složený klíč, s kaskádovým odstraňováním položek
+                ent.HasOne<Order>(s => s.Order).WithMany(m => m.Items)
+                    .HasForeignKey(f => new {f.Prefix, f.Year, f.Number})
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
             
             modelBuilder.Seed();
         }
