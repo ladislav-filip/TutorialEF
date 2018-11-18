@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TutorTerm.DAL.Model;
 
 namespace TutorTerm.DAL
@@ -27,11 +28,24 @@ namespace TutorTerm.DAL
             // zapnutí podpory pro cizí klíče
             Database.ExecuteSqlCommand("PRAGMA foreign_keys = ON");
 
+            var converter = new BoolToStringConverter("T", "F");
+            
             modelBuilder.Entity<User>(ent =>
             {
                 // one to many
                 // entita User má jednu vlastnost Gender, kde Gender může mít kolekci vlastností User spojenou přes cizí klíč User.GenderId
                 ent.HasOne<Gender>(s => s.Gender).WithMany(m => m.Users).HasForeignKey(f => f.GenderId);
+
+                ent.OwnsOne(o => o.Address).ToTable("Address");
+
+                ent.Property(p => p.Active)
+                    .IsRequired()
+                    .HasConversion(converter);
+
+            });
+            
+            modelBuilder.Entity<Customer>(ent =>
+            {                
             });
 
             modelBuilder.Entity<Color>(ent =>

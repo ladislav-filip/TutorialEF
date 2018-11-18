@@ -4,6 +4,8 @@
     {
         public int UserId { get; set; }
 
+        public bool Active { get; set; }
+
         public string Name { get; set; }
 
         public string Surname { get; set; }
@@ -15,5 +17,7 @@
         public byte GenderId { get; set; }
         
         public virtual Gender Gender { get; set; }
+
+        public Address Address { get; set; }
     }
 }
