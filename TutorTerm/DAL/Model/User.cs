@@ -10,6 +10,8 @@
 
         public string Surname { get; set; }
 
+        public short Age { get; set; }
+
         public short LanguageId { get; set; }
 
         public virtual Language Language { get; set; }
