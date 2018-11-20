@@ -21,5 +21,7 @@
         public virtual Gender Gender { get; set; }
 
         public Address Address { get; set; }
+
+        public UserType UsrType { get; set; }
     }
 }

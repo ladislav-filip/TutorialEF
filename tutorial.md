@@ -1,5 +1,7 @@
 # Založení projektu
-Aplikace bude prvotně implementována s Sqlite napojením
+Aplikace bude prvotně implementována s Sqlite napojením.
+
+Pozor: u SQLite nejsou některé standardní ALTER operace podporovány.
 
 * nový project typu "Console App (.NET Core)
 * Nuget Microsoft.EntityFrameworkCore - základní balíček nezávislý na DB, obsahuje základní typy, funkčnosti, rozhraní
@@ -86,6 +88,9 @@ Potřebujeme-li vytvořit relaci `one-to-many`, ale nechceme definovat na entit�
 Pro vytváření komplexních tříd je možné použít atribut `Owned`. Pomocí tohoto atributu se buď vytvoří pole tabulky odpovídající "Owned" třídě anebo za pomocí FluentAPI `OwnsOne` oddělená tabulka.
 
 ### ValueConverters
-EF Core má rozšíření, které výrezně slepšuje použitelnost konverzí hodnot uložených v databázi na potřebné .NET typy. Např, na bool, enum,...<br/>
+EF Core má rozšíření, které výrezně slepšuje použitelnost konverzí hodnot uložených v databázi na potřebné .NET typy. Např, na bool, enum,...
+
+`EnumToStringConverter` je vestavěný convertor zvládajíci převod textu na enumy. Je "caseinsensitive", pokud nedokáže nějakou hodnotu konvertovat, tak nezhavaruje, ale nastaví výchozí (první) hodnotu z enumu.
+
 Existuje 21 vestavěných "konvertorů" a je možné si vytvářet vlastní implementace jako potomky `ValueConverter<,>`.
 

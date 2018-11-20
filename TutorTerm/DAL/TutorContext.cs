@@ -30,6 +30,8 @@ namespace TutorTerm.DAL
 
             var converter = new BoolToStringConverter("T", "F");
             
+            var enumConv = new EnumToStringConverter<UserType>();
+            
             modelBuilder.Entity<User>(ent =>
             {
                 // one to many
@@ -38,9 +40,10 @@ namespace TutorTerm.DAL
 
                 ent.OwnsOne(o => o.Address).ToTable("Address");
 
-                ent.Property(p => p.Active)
-                    .IsRequired()
-                    .HasConversion(converter);
+                ent.Property(p => p.Active).IsRequired().HasConversion(converter);
+                
+                // textový sloupec použitý pro Enum s již existujícím convertorem
+                ent.Property(p => p.UsrType).HasMaxLength(20).HasColumnType("text").HasConversion(enumConv);
 
             });
             
