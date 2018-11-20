@@ -78,7 +78,9 @@ Jednoduché (single) klíče lze definovat pomocí data atributů. U složených
 
 ### Relace
 Relace definujeme na úrovní modelové třídy entity přidáním virtuální vlastnosti odkazující objekt relace (one-to-one) anebo na kolekci objektů relace (one-to-many).<br/>
-Pokud není vazbu možné vytvořit na základě jmenné konvence, tak je nutné použít atributy nebo FluentAPI
+Pokud není vazbu možné vytvořit na základě jmenné konvence, tak je nutné použít atributy nebo FluentAPI.
+
+Potřebujeme-li vytvořit relaci `one-to-many`, ale nechceme definovat na entitě kolekci, tak stačí použít toto `ent.HasOne<Entita>(s => s.MasterEntita).WithMany().HasForeignKey(f => f.MasterId);`, kde do příkazu **WithMany** a na "child" entitě pak není nutné mít kolekci.
 
 ### Komplexní třídy
 Pro vytváření komplexních tříd je možné použít atribut `Owned`. Pomocí tohoto atributu se buď vytvoří pole tabulky odpovídající "Owned" třídě anebo za pomocí FluentAPI `OwnsOne` oddělená tabulka.

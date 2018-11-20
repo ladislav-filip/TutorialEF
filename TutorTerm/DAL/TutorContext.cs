@@ -75,6 +75,14 @@ namespace TutorTerm.DAL
                     .OnDelete(DeleteBehavior.Cascade);
             });
             
+            modelBuilder.Entity<Car>(ent =>
+            {
+                // vazba na "master" tabulku bez nutnosti definovat kolekci "childů"
+                ent.HasOne<User>(s => s.User).WithMany().HasForeignKey(f => f.UserId);
+
+                ent.Property(p => p.Name).IsRequired().HasMaxLength(50);
+            });
+            
             modelBuilder.Seed();
         }
     }

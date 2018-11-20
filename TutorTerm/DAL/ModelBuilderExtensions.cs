@@ -39,6 +39,13 @@ namespace TutorTerm.DAL
                 new User() { UserId = 2, Name = "Alžběta", Surname = "Druhá", GenderId = 2, LanguageId = 4 },
                 new User() { UserId = 3, Name = "Karel", Surname = "Čtrvtý", GenderId = 1, LanguageId = 1 }
             });
+
+            modelBuilder.Entity<Car>().HasData(new Car[]
+            {
+                new Car() { CarId = 1, UserId = 1, Name = "NJB 45-28"},
+                new Car() { CarId = 2, UserId = 1, Name = "FMC 22-22"},
+                new Car() { CarId = 3, UserId = 3, Name = "1T5 00-01"}
+            });
         }
     }
 }
