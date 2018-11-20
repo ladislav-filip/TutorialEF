@@ -92,5 +92,5 @@ EF Core má rozšíření, které výrezně slepšuje použitelnost konverzí ho
 
 `EnumToStringConverter` je vestavěný convertor zvládajíci převod textu na enumy. Je "caseinsensitive", pokud nedokáže nějakou hodnotu konvertovat, tak nezhavaruje, ale nastaví výchozí (první) hodnotu z enumu.
 
-Existuje 21 vestavěných "konvertorů" a je možné si vytvářet vlastní implementace jako potomky `ValueConverter<,>`.
+Existuje 21 vestavěných "konvertorů" a je možné si vytvářet vlastní implementace pomocí třídy `ValueConverter<,>`.
 
