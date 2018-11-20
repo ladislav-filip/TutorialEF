@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="DAL" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Devart.Data.Oracle.EFCore" Version="9.6.621" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="license.key" />
+      <None Remove="connstr.txt" />
+    </ItemGroup>
+
+</Project>

@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TutorTerm", "TutorTerm\TutorTerm.csproj", "{92A4FFE4-F25D-4A59-A574-757DE679F463}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OracleDevart", "OracleDevart\OracleDevart.csproj", "{8A52D04D-67DD-4E02-8B5A-135576617642}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{92A4FFE4-F25D-4A59-A574-757DE679F463}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92A4FFE4-F25D-4A59-A574-757DE679F463}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92A4FFE4-F25D-4A59-A574-757DE679F463}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A52D04D-67DD-4E02-8B5A-135576617642}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A52D04D-67DD-4E02-8B5A-135576617642}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A52D04D-67DD-4E02-8B5A-135576617642}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A52D04D-67DD-4E02-8B5A-135576617642}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
