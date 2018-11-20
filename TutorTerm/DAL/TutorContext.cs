@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TutorTerm.DAL.Model;
 
@@ -77,6 +79,11 @@ namespace TutorTerm.DAL
                     .HasForeignKey(f => new {f.Prefix, f.Year, f.Number})
                     .OnDelete(DeleteBehavior.Cascade);
             });
+
+            // vlastní convertor na enumy ve stylu FISu
+            var valConvCar = new ValueConverter<CarType?, string>(                
+                v => v.ToString().ToUpper(),
+                v => v == null ? CarType.Vehicle : (CarType)Enum.Parse(typeof(CarType), v, true));
             
             modelBuilder.Entity<Car>(ent =>
             {
@@ -84,6 +91,8 @@ namespace TutorTerm.DAL
                 ent.HasOne<User>(s => s.User).WithMany().HasForeignKey(f => f.UserId);
 
                 ent.Property(p => p.Name).IsRequired().HasMaxLength(50);
+
+                ent.Property(p => p.CarType).HasMaxLength(20).HasColumnType("text").HasConversion(valConvCar);
             });
             
             modelBuilder.Seed();

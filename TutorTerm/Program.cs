@@ -26,16 +26,20 @@ namespace TutorTerm
                 
                 //var data = context.Set<Color>().ToList();
                 //data.ForEach(Log);
-                context.Set<User>().ToList().ForEach(Log);
+                //context.Set<User>().ToList().ForEach(Log);
 
-//                var tmp = context.Set<User>().First();
-//                tmp.UsrType = UserType.Employee;
-//                context.SaveChanges();
+                //var tmp = context.Set<User>().First();
+                //tmp.UsrType = UserType.Employee;
+
+                //context.Set<Car>().ToList().ForEach(Log);
+                //context.Set<Car>().First().CarType = CarType.Mercedes;
 
                 //context.Set<Car>().Include(p => p.User).ToList().ForEach(Log);
                 //context.Set<User>().ToList().ForEach(p => Debug.WriteLine(p.Name + " " + p.Surname));
 
                 //CreateAndShowOrders();
+                
+                context.SaveChanges();
             }
 
 
