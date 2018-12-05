@@ -36,14 +36,14 @@ namespace OracleDevart.DAL
             {
                 ent.ToTable("ZBOZI");
                 ent.HasKey(k => k.C_ZBO);
-                ent.Property(p => p.NAZEV).IsRequired();
+                ent.Property(p => p.NAZEV).IsRequired();                
             });
 
             modelBuilder.Entity<Mn>(ent =>
             {
                 ent.ToTable("MN");
                 ent.HasKey(k => new { k.C_MN, k.VER_MN });
-
+                ent.Property(p => p.STDOK).HasMaxLength(80);
             });
         }
     }

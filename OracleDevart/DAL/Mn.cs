@@ -13,5 +13,7 @@ namespace OracleDevart.DAL
         public DateTime? D_DO { get; set; }
 
         public DateTime? D_OD { get; set; }
+
+        public string STDOK { get; set; }
     }
 }
