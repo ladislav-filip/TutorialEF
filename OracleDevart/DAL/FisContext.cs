@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Logging;
 
 namespace OracleDevart.DAL
@@ -32,11 +33,15 @@ namespace OracleDevart.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            var converter = new BoolToStringConverter("F", "T");
+
             modelBuilder.Entity<Zbozi>(ent =>
             {
                 ent.ToTable("ZBOZI");
                 ent.HasKey(k => k.C_ZBO);
-                ent.Property(p => p.NAZEV).IsRequired();                
+                ent.Property(p => p.NAZEV).IsRequired();
+                // field ZRUSENO is Oracle: CHAR(1) NULL
+                ent.Property(p => p.ZRUSENO).HasConversion(converter);
             });
 
             modelBuilder.Entity<Mn>(ent =>

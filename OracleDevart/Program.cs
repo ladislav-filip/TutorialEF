@@ -12,8 +12,7 @@ namespace OracleDevart
             DbMonitor = new Devart.Data.Oracle.OracleMonitor();
             DbMonitor.IsActive = true;
 
-            PrimitiveError.SampleCorrectly();
-            PrimitiveError.SampleError();
+            ConverterError.SampleError();
 
             WriteLine();
             WriteLine("Finnish.");
