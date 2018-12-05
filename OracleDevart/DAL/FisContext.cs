@@ -15,6 +15,11 @@ namespace OracleDevart.DAL
             return scb.ToString();
         }
 
+        public DbSet<Zbozi> ZboziTable { get; set; }
+
+        public DbSet<Mn> MnTable { get; set; }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseOracle(CreateConnectionString());            
@@ -27,15 +32,18 @@ namespace OracleDevart.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Rkdav>(ent =>
+            modelBuilder.Entity<Zbozi>(ent =>
             {
-                ent.HasKey(k => k.RKDAV);
-                ent.Property(p => p.RKDAV).HasMaxLength(5);
+                ent.ToTable("ZBOZI");
+                ent.HasKey(k => k.C_ZBO);
+                ent.Property(p => p.NAZEV).IsRequired();
             });
-                
-            modelBuilder.Entity<Entity>(ent =>
+
+            modelBuilder.Entity<Mn>(ent =>
             {
-                ent.HasKey(k => k.ENTITA);
+                ent.ToTable("MN");
+                ent.HasKey(k => new { k.C_MN, k.VER_MN });
+
             });
         }
     }

@@ -12,8 +12,7 @@ namespace OracleDevart
             DbMonitor = new Devart.Data.Oracle.OracleMonitor();
             DbMonitor.IsActive = true;
             
-            // sample wrong LIKE method
-            OracleFunc.Like();
+            BracketMissing.SampleError();
 
             WriteLine();
             WriteLine("Finnish.");
