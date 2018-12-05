@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Devart.Common.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.Logging;
@@ -35,6 +36,18 @@ namespace OracleDevart.DAL
         {
             var converter = new BoolToStringConverter("F", "T");
 
+            var myBoolConverter = new ValueConverter<bool, string>(
+                v => v ? "T" : "F",
+                v => v == "T"
+                );
+
+            var enumConverter = new EnumToStringConverter<BoolEnum>();
+
+            var myEnumConverter = new ValueConverter<BooleanEnum, string>(
+                v => v == BooleanEnum.TrueValue ? "T" : "F",
+                v => v == "T" ? BooleanEnum.TrueValue : BooleanEnum.FalseValue
+                );
+
             modelBuilder.Entity<Zbozi>(ent =>
             {
                 ent.ToTable("ZBOZI");
@@ -42,6 +55,12 @@ namespace OracleDevart.DAL
                 ent.Property(p => p.NAZEV).IsRequired();
                 // field ZRUSENO is Oracle: CHAR(1) NULL
                 ent.Property(p => p.ZRUSENO).HasConversion(converter);
+                // field ZOBR_INTERNET is Oracle: CHAR(1) NULL
+                ent.Property(p => p.ZOBR_INTERNET).HasConversion(myBoolConverter);
+                // field SESTAVA is Oracle: CHAR(1) NULL
+                ent.Property(p => p.SESTAVA).HasConversion(enumConverter);
+                // field SALOBAL is Oracle: CHAR(1) NULL
+                ent.Property(p => p.SALOBAL).HasConversion(myEnumConverter);
             });
 
             modelBuilder.Entity<Mn>(ent =>
