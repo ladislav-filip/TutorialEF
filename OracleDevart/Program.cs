@@ -19,21 +19,9 @@ namespace OracleDevart
 
             #region Bugs
 
-            // create incorrect SQL, see inner...
-            //ConverterError.SampleMyEnumToStrWrong();
-
-            ConverterError.SampleMyBoolToStrError();
-
-            //ConverterError.SampleBoolToStrError();
+            DateTimeError.SampleDateTimeError();
 
             #endregion
-
-            // Workarround for BOOL values - convert to two states Enum
-            //ConverterError.SampleEnumToStrCorrectly();
-
-            //ConverterError.SampleBoolToStrUpdateCorrectly();
-
-            //ConverterError.SampleMyEnumToStrUpdateCorrectly();
 
             WriteLine();
             WriteLine("Finnish.");
