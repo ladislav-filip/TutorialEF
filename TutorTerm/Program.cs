@@ -16,38 +16,45 @@ namespace TutorTerm
         static void Main(string[] args)
         {
 
-            using (var context = new TutorContext())
-            {
-                // pokud DB existuje, tak jí neprve odstraníme/vymažeme
-                //context.Database.EnsureDeleted();
-                
-                // pokud DB neexistuje, tak se automaticky vytvoří a inicializuje všemis strukturami a daty
-                //context.Database.EnsureCreated();
-                
-                //var data = context.Set<Color>().ToList();
-                //data.ForEach(Log);
-                //context.Set<User>().ToList().ForEach(Log);
+            //DynamicExpression.SampleUserWhere();
+            //DynamicExpression.SampleUserDynField();
+            //DynamicExpression.SampleUserMap();
+            //DynamicExpression.SampleUserMap();
+            //DynamicExpression.SampleUserMap();
+            DynamicExpression.SampleFullUserMap();
 
-                //var tmp = context.Set<User>().First();
-                //tmp.UsrType = UserType.Employee;
+            //using (var context = new TutorContext())
+            //{
+            // pokud DB existuje, tak jí neprve odstraníme/vymažeme
+            //context.Database.EnsureDeleted();
 
-                //context.Set<Car>().ToList().ForEach(Log);
-                //context.Set<Car>().First().CarType = CarType.Mercedes;
+            // pokud DB neexistuje, tak se automaticky vytvoří a inicializuje všemis strukturami a daty
+            //context.Database.EnsureCreated();
 
-                //context.Set<Car>().Include(p => p.User).ToList().ForEach(Log);
-                //context.Set<User>().ToList().ForEach(p => Debug.WriteLine(p.Name + " " + p.Surname));
+            //var data = context.Set<Color>().ToList();
+            //data.ForEach(Log);
+            //context.Set<User>().ToList().ForEach(Log);
 
-                //CreateAndShowOrders();
-                
-                context.SaveChanges();
-            }
+            //var tmp = context.Set<User>().First();
+            //tmp.UsrType = UserType.Employee;
+
+            //context.Set<Car>().ToList().ForEach(Log);
+            //context.Set<Car>().First().CarType = CarType.Mercedes;
+
+            //context.Set<Car>().Include(p => p.User).ToList().ForEach(Log);
+            //context.Set<User>().ToList().ForEach(p => Debug.WriteLine(p.Name + " " + p.Surname));
+
+            //CreateAndShowOrders();
+
+            //    context.SaveChanges();
+            //}
 
 
             WriteLine("Finnish.");
             ReadKey();
         }
 
-        static void Log(object obj)
+        public static void Log(object obj)
         {
             WriteLine(ObjectDumper.Dump(obj));
         }
