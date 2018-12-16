@@ -1,10 +1,14 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using TutorTerm.DAL;
 using TutorTerm.DAL.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace TutorTerm
 {
@@ -49,8 +53,8 @@ namespace TutorTerm
         {
             using (var context = new TutorContext())
             {
-                var query = context.Set<User>().Select(DynamicSelectGenerator<User>("Name,Surname")).ToList();
-                query.ForEach(Program.Log);
+                var query = context.Set<User>().AsNoTracking().Select(DynamicSelectGenerator<User>("Name,Surname")).ToList();
+                //query.ForEach(Program.Log);
             }
         }
 
@@ -62,15 +66,15 @@ namespace TutorTerm
                     .ForMember(m => m.Id, opt => opt.MapFrom(f => f.UserId));
             });
             //conf1.AssertConfigurationIsValid();
-            var map1 = conf1.CreateMapper();  
-            
+            var map1 = conf1.CreateMapper();
+
 
             using (var context = new TutorContext())
             {
                 var query = context.Set<User>();
-                var data = query.ProjectTo<UserDTO>(map1.ConfigurationProvider);
+                var data = query.ProjectTo<UserDTO>(map1.ConfigurationProvider).ToList();
 
-                data.ToList().ForEach(Program.Log);
+                //data.ForEach(Program.Log);
             }
         }
 
@@ -89,9 +93,9 @@ namespace TutorTerm
             using (var context = new TutorContext())
             {
                 var query = context.Set<User>();
-                var data = query.ProjectTo<UserFullDTO>(map1.ConfigurationProvider);
+                var data = query.ProjectTo<UserFullDTO>(map1.ConfigurationProvider).ToList();
 
-                data.ToList().ForEach(Program.Log);
+                //data.ForEach(Program.Log);
             }
         }
 
@@ -115,14 +119,14 @@ namespace TutorTerm
                 .Select(o =>
                 {
 
-                // property "Field1"
-                var mi = typeof(T).GetProperty(o);
+                    // property "Field1"
+                    var mi = typeof(T).GetProperty(o);
 
-                // original value "o.Field1"
-                var xOriginal = Expression.Property(xParameter, mi);
+                    // original value "o.Field1"
+                    var xOriginal = Expression.Property(xParameter, mi);
 
-                // set value "Field1 = o.Field1"
-                return Expression.Bind(mi, xOriginal);
+                    // set value "Field1 = o.Field1"
+                    return Expression.Bind(mi, xOriginal);
                 }
             );
 
@@ -134,6 +138,27 @@ namespace TutorTerm
 
             // compile to Func<Data, Data>
             return lambda.Compile();
+        }
+
+        public static void SaveMockUsers(string fileJson)
+        {
+            var res = JsonConvert.DeserializeObject<User[]>(File.ReadAllText(fileJson));
+            for (var i = 0; i < 30; i++)
+            {
+                using (var context = new TutorContext())
+                {
+                    var users = context.Set<User>();
+                    var sw = Stopwatch.StartNew();
+                    foreach (var u in res)
+                    {
+                        u.UserId = 0;
+                        users.Add(u);
+                    }
+                    context.SaveChanges();
+
+                    Console.WriteLine("Time elapsed: " + sw.ElapsedMilliseconds);
+                }
+            }
         }
     }
 }

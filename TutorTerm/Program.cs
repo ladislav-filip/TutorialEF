@@ -12,16 +12,27 @@ namespace TutorTerm
     class Program
     {
         static Random m_rnd = new Random();
-        
+
         static void Main(string[] args)
         {
+            //RecreateDatabase();
 
-            //DynamicExpression.SampleUserWhere();
-            //DynamicExpression.SampleUserDynField();
-            //DynamicExpression.SampleUserMap();
-            //DynamicExpression.SampleUserMap();
-            //DynamicExpression.SampleUserMap();
-            DynamicExpression.SampleFullUserMap();
+            for (var i = 0; i < 10; i++)
+            {
+                var sw = Stopwatch.StartNew();
+
+                //DynamicExpression.SampleUserWhere();
+
+                //DynamicExpression.SampleUserDynField();
+
+                DynamicExpression.SampleUserMap();
+
+                //DynamicExpression.SampleFullUserMap();
+
+                Console.WriteLine("Time elapsed: " + sw.ElapsedMilliseconds);
+            }
+
+            //DynamicExpression.SaveMockUsers(@"MOCK_DATA.json");
 
             //using (var context = new TutorContext())
             //{
@@ -54,21 +65,33 @@ namespace TutorTerm
             ReadKey();
         }
 
+        public static void RecreateDatabase()
+        {
+            using (var context = new TutorContext())
+            {
+                // pokud DB existuje, tak jí neprve odstraníme/ vymažeme
+                context.Database.EnsureDeleted();
+
+                // pokud DB neexistuje, tak se automaticky vytvoří a inicializuje všemis strukturami a daty
+                context.Database.EnsureCreated();
+            }
+        }
+
         public static void Log(object obj)
         {
             WriteLine(ObjectDumper.Dump(obj));
         }
-        
+
         static void CreateAndShowOrders()
         {
             using (var context = new TutorContext())
             {
                 var orders = context.Set<Order>();
                 var yearNow = 2018;
-                
+
                 var ord = new Order()
                 {
-                    Prefix = "FA", 
+                    Prefix = "FA",
                     Year = yearNow,
                     // vyhledáme poslední volné číslo
                     Number = 1 + orders.Where(p => p.Year == yearNow).Select(p => p.Number).DefaultIfEmpty().Max(),
