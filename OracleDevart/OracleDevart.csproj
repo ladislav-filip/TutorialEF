@@ -10,8 +10,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="8.0.0" />
       <PackageReference Include="Devart.Data.Oracle.EFCore" Version="9.6.621" />
       <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.1" />
+      <PackageReference Include="ObjectDumper.NET" Version="2.1.18332.7" />
     </ItemGroup>
 
     <ItemGroup>

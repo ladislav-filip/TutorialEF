@@ -17,20 +17,22 @@ namespace TutorTerm
         {
             //RecreateDatabase();
 
-            for (var i = 0; i < 10; i++)
-            {
-                var sw = Stopwatch.StartNew();
+            DynamicExpression.SampleFullUserMap();
 
-                //DynamicExpression.SampleUserWhere();
+            //for (var i = 0; i < 10; i++)
+            //{
+            //    var sw = Stopwatch.StartNew();
 
-                //DynamicExpression.SampleUserDynField();
+            //    //DynamicExpression.SampleUserWhere();
 
-                DynamicExpression.SampleUserMap();
+            //    //DynamicExpression.SampleUserDynField();
 
-                //DynamicExpression.SampleFullUserMap();
+            //    DynamicExpression.SampleUserMap();
 
-                Console.WriteLine("Time elapsed: " + sw.ElapsedMilliseconds);
-            }
+            //    //DynamicExpression.SampleFullUserMap();
+
+            //    Console.WriteLine("Time elapsed: " + sw.ElapsedMilliseconds);
+            //}
 
             //DynamicExpression.SaveMockUsers(@"MOCK_DATA.json");
 

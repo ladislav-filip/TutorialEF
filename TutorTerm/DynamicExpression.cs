@@ -84,7 +84,7 @@ namespace TutorTerm
             {
                 cfg.CreateMap<User, UserFullDTO>()
                     .ForMember(m => m.Id, opt => opt.MapFrom(f => f.UserId))
-                    .ForMember(m => m.FullName, opt => opt.MapFrom(f => f.Name + " " + f.Surname));
+                    .ForMember(m => m.FullName, opt => opt.MapFrom(ExpDto()));
             });
             //conf1.AssertConfigurationIsValid();
             var map1 = conf1.CreateMapper();
@@ -95,8 +95,13 @@ namespace TutorTerm
                 var query = context.Set<User>();
                 var data = query.ProjectTo<UserFullDTO>(map1.ConfigurationProvider).ToList();
 
-                //data.ForEach(Program.Log);
+                data.ForEach(Program.Log);
             }
+        }
+
+        private static Expression<Func<User, string>> ExpDto()
+        {
+            return f => f.Name + " " + f.Surname;
         }
 
         public static Func<T, T> DynamicSelectGenerator<T>(string Fields = "")
