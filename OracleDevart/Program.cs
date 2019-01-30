@@ -23,30 +23,58 @@ class Program
             using (var context = new DAL.FisContext())
             {
                 var config = Devart.Data.Oracle.Entity.Configuration.OracleEntityProviderConfig.Instance;
-                
-                // toto nastavení je platné pro všechny následující Query dotazy
+
                 config.QueryOptions.CaseInsensitiveLike = true;
-
-                var uzivs = context.Set<Uziv>();
-                var qry = uzivs.Skip(10).Take(10);
-
-                var data = qry.ProjectTo<UzivDTO>().ToList();
+                var data = LoadPure(context);
 
                 WriteLine("---------------------------------------");
                 data.ForEach(Log);
                 WriteLine($"Found {data.Count} items.");
 
-                var ent = context.Set<Entity>();
-                var entData = ent.Where(p => p.NAZEV.Contains("maj")).ToList();
-                WriteLine();
+                data = LoadByPagging(context);
+                #region System.IndexOutOfRangeException: 'Index was outside the bounds of the array.'
+
+                // Wrong SQL, missing "IsProg" column
+                /*
+                SELECT "t"."Id"
+                FROM(
+                    SELECT "dtoUziv".C_UZV AS "Id", CASE
+                        WHEN(DBMS_LOB.COMPARE("dtoUziv".PROG, 'T')) = 0
+                        THEN 1 ELSE 0
+                    END AS "IsProg", ROWNUM AS "ROWNUM"
+                    FROM UZIV "dtoUziv"
+                ) "t"
+                WHERE("t"."ROWNUM" > :p__p_0) AND("t"."ROWNUM" <= (: p__p_0 + :p__p_0))
+                */
+
+                #endregion
+
                 WriteLine("---------------------------------------");
-                entData.ForEach(p => WriteLine($"'{p.ENTITA}' : {p.NAZEV}"));
+                data.ForEach(Log);
                 WriteLine($"Found {data.Count} items.");
             }
 
             WriteLine();
             WriteLine("Finnish.");
             ReadKey();
+        }
+
+        private static System.Collections.Generic.List<UzivDTO> LoadByPagging(FisContext context)
+        {
+            var uzivs = context.Set<Uziv>();
+            var qry = uzivs.Skip(10).Take(10);
+
+            var data = qry.ProjectTo<UzivDTO>().ToList();
+            return data;
+        }
+
+        private static System.Collections.Generic.List<UzivDTO> LoadPure(FisContext context)
+        {
+            var uzivs = context.Set<Uziv>();
+            var qry = uzivs;
+
+            var data = qry.ProjectTo<UzivDTO>().ToList();
+            return data;
         }
 
         static void Log(object obj)

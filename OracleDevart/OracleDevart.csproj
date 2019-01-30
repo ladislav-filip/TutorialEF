@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="AutoMapper" Version="6.0.2" />
+      <PackageReference Include="AutoMapper" Version="8.0.0" />
       <PackageReference Include="Devart.Data.Oracle.EFCore" Version="9.6.675" />
       <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0-preview.19074.2" />
       <PackageReference Include="ObjectDumper.NET" Version="2.2.19021.1" />
