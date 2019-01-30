@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using OracleDevart.DAL;
 using static System.Console;
 
@@ -13,6 +15,10 @@ class Program
         {
             DbMonitor = new Devart.Data.Oracle.OracleMonitor();
             DbMonitor.IsActive = true;
+
+            Mapper.Initialize(cfg => 
+                cfg.CreateMap<Uziv, UzivDTO>().ForMember(dst => dst.IsProg, opt => opt.MapFrom(src =>src.PROG == "T"))
+            );
             
             using (var context = new DAL.FisContext())
             {
@@ -21,15 +27,13 @@ class Program
                 // toto nastavení je platné pro všechny následující Query dotazy
                 config.QueryOptions.CaseInsensitiveLike = true;
 
-                var rkdavs = context.Set<Rkdav>();
-                //var data = rkdavs.ToList();
-                //var data = rkdavs.Where(p => p.RKDAV == "1D                  ").ToList();
-                //var data = rkdavs.Where(p => OracleFunctions.Like(p.RKDAV, "1D  x")).ToList();
-                //var data = rkdavs.Where(p => EF.Functions.Like(p.RKDAV, "'1D   '", "*")).ToList();
-                //var data = rkdavs.Where(p => p.RKDAV.Contains("1d")).ToList();
-                var data = rkdavs.Where(p => p.NAZEV.Contains("pá") || p.RKDAV.Contains("pá")).ToList();
+                var uzivs = context.Set<Uziv>();
+                var qry = uzivs.Skip(10).Take(10);
+
+                var data = qry.ProjectTo<UzivDTO>().ToList();
+
                 WriteLine("---------------------------------------");
-                data.ForEach(p => WriteLine($"'{p.RKDAV}' : {p.NAZEV}"));
+                data.ForEach(Log);
                 WriteLine($"Found {data.Count} items.");
 
                 var ent = context.Set<Entity>();
@@ -43,6 +47,11 @@ class Program
             WriteLine();
             WriteLine("Finnish.");
             ReadKey();
+        }
+
+        static void Log(object obj)
+        {
+            WriteLine(ObjectDumper.Dump(obj));
         }
 
     }

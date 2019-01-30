@@ -37,6 +37,11 @@ namespace OracleDevart.DAL
             {
                 ent.HasKey(k => k.ENTITA);
             });
+
+            modelBuilder.Entity<Uziv>(ent =>
+            {
+                ent.HasKey(k => k.Id);
+            });
         }
     }
 }
