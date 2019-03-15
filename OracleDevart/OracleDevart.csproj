@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Devart.Data.Oracle.EFCore" Version="9.6.646" />
+      <PackageReference Include="Devart.Data.Oracle.EFCore" Version="9.6.696" />
       <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.1" />
     </ItemGroup>
 

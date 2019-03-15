@@ -20,9 +20,9 @@ namespace OracleDevart
             #region Bugs
 
             // create incorrect SQL, see inner...
-            //ConverterError.SampleMyEnumToStrWrong();
+            ConverterError.SampleMyEnumToStrWrong();
 
-            ConverterError.SampleMyBoolToStrError();
+            //ConverterError.SampleMyBoolToStrError();
 
             //ConverterError.SampleBoolToStrError();
 

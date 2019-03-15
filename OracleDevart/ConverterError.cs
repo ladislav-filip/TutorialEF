@@ -10,7 +10,7 @@ namespace OracleDevart
         {
             using (var context = new FisContext())
             {
-
+                // TODO: toto je opraveno ve verzi 9.6.696, vyřešili to takto: "WHERE ((DBMS_LOB.COMPARE("p".ZOBR_INTERNET, TO_NCLOB('F'))) = 0)"
                 var data = context.ZboziTable.Where(p => p.ZRUSENO == true);
 
                 /*
@@ -45,8 +45,8 @@ namespace OracleDevart
         {
             using (var context = new FisContext())
             {
-
-                var data = context.ZboziTable.Where(p => p.ZOBR_INTERNET == true);
+                // TODO: toto je opraveno ve verzi 9.6.696, vyřešili to takto: "WHERE ((DBMS_LOB.COMPARE("p".ZOBR_INTERNET, TO_NCLOB('F'))) = 0)"
+                var data = context.ZboziTable.Where(p => p.ZOBR_INTERNET == false);
 
                 /*
                 System.FormatException: 'String was not recognized as a valid Boolean.'
