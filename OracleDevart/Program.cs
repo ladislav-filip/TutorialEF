@@ -25,13 +25,13 @@ class Program
                 var config = Devart.Data.Oracle.Entity.Configuration.OracleEntityProviderConfig.Instance;
 
                 config.QueryOptions.CaseInsensitiveLike = true;
-                var data = LoadPure(context);
+                //var data = LoadPure(context);
 
-                WriteLine("---------------------------------------");
-                data.ForEach(Log);
-                WriteLine($"Found {data.Count} items.");
+                //WriteLine("---------------------------------------");
+                //data.ForEach(Log);
+                //WriteLine($"Found {data.Count} items.");
 
-                data = LoadByPagging(context);
+                var data = LoadByPagging(context);
                 #region System.IndexOutOfRangeException: 'Index was outside the bounds of the array.'
 
                 // Wrong SQL, missing "IsProg" column
