@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TutorTerm.DAL.Model;
+using TutorTerm.DAL.Queries;
 
 namespace TutorTerm.DAL
 {
@@ -15,6 +16,8 @@ namespace TutorTerm.DAL
             = new Microsoft.Extensions.Logging.LoggerFactory(new[] { new Microsoft.Extensions.Logging.Debug.DebugLoggerProvider() });
         
         public DbSet<Gender> Genders { get; set; }
+
+        //public DbQuery<UserQry> UsersQry { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -94,6 +97,8 @@ namespace TutorTerm.DAL
 
                 ent.Property(p => p.CarType).HasMaxLength(20).HasColumnType("text").HasConversion(valConvCar);
             });
+
+            modelBuilder.Query<UserQry>();
             
             modelBuilder.Seed();
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using TutorTerm.DAL;
 using TutorTerm.DAL.Model;
+using TutorTerm.DAL.Queries;
 using static System.Console;
 
 namespace TutorTerm
@@ -20,13 +21,22 @@ namespace TutorTerm
             {
                 // pokud DB existuje, tak jí neprve odstraníme/vymažeme
                 //context.Database.EnsureDeleted();
-                
+
                 // pokud DB neexistuje, tak se automaticky vytvoří a inicializuje všemis strukturami a daty
                 //context.Database.EnsureCreated();
-                
+
                 //var data = context.Set<Color>().ToList();
                 //data.ForEach(Log);
-                //context.Set<User>().ToList().ForEach(Log);
+                //context.Set<User>().Take(20).ToList().ForEach(Log);
+
+                //WriteLine(context.Set<User>().Count());
+                
+                var usrQr = context.Query<UserQry>()
+                    .FromSql("SELECT CASE WHEN Active = 'F' THEN 1 ELSE 0 END as Active, Name || ' ' || Surname as Fullname FROM User")
+                    .Where(p => p.Fullname.StartsWith("F"))
+                    .OrderBy(p => p.Fullname)
+                    .ToList();
+                usrQr.ForEach(Log);
 
                 //var tmp = context.Set<User>().First();
                 //tmp.UsrType = UserType.Employee;
@@ -38,8 +48,8 @@ namespace TutorTerm
                 //context.Set<User>().ToList().ForEach(p => Debug.WriteLine(p.Name + " " + p.Surname));
 
                 //CreateAndShowOrders();
-                
-                context.SaveChanges();
+
+                //context.SaveChanges();
             }
 
 
