@@ -10,9 +10,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Devart.Data.Oracle.EFCore" Version="9.7.734" />
-      <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.1" />
-      <PackageReference Include="ObjectDumper.NET" Version="2.4.19138.1" />
+      <PackageReference Include="Devart.Data.Oracle.EFCore" Version="9.7.805" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0-preview7.19362.4" />
+      <PackageReference Include="ObjectDumper.NET" Version="2.4.19204.1-pre" />
     </ItemGroup>
 
     <ItemGroup>
