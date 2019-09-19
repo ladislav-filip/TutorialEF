@@ -6,11 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="DAL" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="Devart.Data.Oracle.EFCore" Version="9.7.805" />
+      <PackageReference Include="EntityFramework" Version="6.2.0" />
       <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.1" />
     </ItemGroup>
 

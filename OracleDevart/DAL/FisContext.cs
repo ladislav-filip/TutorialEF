@@ -37,6 +37,10 @@ namespace OracleDevart.DAL
             {
                 ent.HasKey(k => k.ENTITA);
             });
+
+            modelBuilder.Entity<PtpvzVazby>(ent =>
+                ent.HasKey(k => new { k.TYP, k.R_DOK, k.C_DOK, k.C_OPER, k.DRUH_VAZBY })
+            );
         }
     }
 }
